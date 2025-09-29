@@ -1,0 +1,30 @@
+spring:
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/mydb}
+    username: ${SPRING_DATASOURCE_USERNAME:admin}
+    password: ${SPRING_DATASOURCE_PASSWORD:C0nnect123}
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+#  h2:
+#    console:
+#      enabled: true
+#      path: /h2-console
+
+  devtools:
+    restart:
+      enabled: true
+
+security:
+  jwt:
+    # Use a secret with at least 32 characters to satisfy HS256 key length
+    secret: "change-this-development-secret-key-32-chars-min"
+    # 1 day in milliseconds
+    expirationMillis: 86400000
