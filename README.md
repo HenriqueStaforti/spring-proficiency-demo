@@ -1,2 +1,2 @@
-# spring-crud-security
-Simple secured CRUD made with Spring Boot
+# Spring Boot proficiency demo project
+Spring Boot project using a couple of technologies to demonstrate proficiency in the framework, such as Spring Security, Spring Data JPA, Spring Data Redis, RabbitMQ, Lombok, MapStruct, Flyway, Postgresql and more.
