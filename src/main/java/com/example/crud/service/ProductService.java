@@ -30,7 +30,6 @@ public class ProductService {
     public ProductResponseDTO create(ProductEntity product) {
         ProductEntity entity = productRepository.save(product);
 
-        System.out.println("Product created: " + entity);
         productPublisherService.publishProductCreated(entity);
 
         return productMapper.toResponseDto(entity);

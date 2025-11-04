@@ -21,6 +21,7 @@ import java.time.Instant;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -53,6 +54,7 @@ public class ProductControllerTest {
         when(productService.create(any(ProductEntity.class))).thenReturn(expectedResponse);
 
         MvcResult result = mockMvc.perform(post("/products")
+            .with(csrf())
             .contentType(MediaType.APPLICATION_JSON)
             .content(objectMapper.writeValueAsString(productRequestDTO)))
             .andExpect(status().isOk())
@@ -74,6 +76,7 @@ public class ProductControllerTest {
         ProductRequestDTO productRequestDTO = buildProductRequest("", 123.99, true);
 
         mockMvc.perform(post("/products")
+            .with(csrf())
             .contentType(MediaType.APPLICATION_JSON)
             .content(new ObjectMapper().writeValueAsString(productRequestDTO)))
             .andExpect(status().isBadRequest());

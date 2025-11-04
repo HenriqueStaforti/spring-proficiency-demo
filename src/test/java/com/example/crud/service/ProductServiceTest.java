@@ -5,6 +5,7 @@ import com.example.crud.dto.ProductUpdateRequestDTO;
 import com.example.crud.exception.ResourceNotFoundException;
 import com.example.crud.mapper.ProductMapper;
 import com.example.crud.model.ProductEntity;
+import com.example.crud.repository.ProductCacheRepository;
 import com.example.crud.repository.ProductRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -33,12 +34,19 @@ class ProductServiceTest {
     private ProductRepository productRepository;
 
     @Mock
+    private ProductCacheRepository cache;
+
+    @Mock
+    private ProductPublisherService productPublisherService;
+
+    @Mock
     private ProductMapper productMapper;
 
     @InjectMocks
     private ProductService productService;
 
     private ProductEntity sampleProduct;
+    private ProductResponseDTO sampleResponse;
 
     @BeforeEach
     void setUp() {
@@ -49,13 +57,17 @@ class ProductServiceTest {
                 .enabled(true)
                 .createdAt(Instant.now())
                 .build();
+
+        sampleResponse = new ProductResponseDTO(sampleProduct);
     }
 
     @Test
     void create_shouldPersistAndReturnProduct() {
-        when(productRepository.save(any(ProductEntity.class))).thenReturn(sampleProduct);
-
         ProductEntity toSave = ProductEntity.builder().name("New").price(10.0).enabled(true).build();
+
+        when(productRepository.save(any(ProductEntity.class))).thenReturn(sampleProduct);
+        when(productMapper.toResponseDto(sampleProduct)).thenReturn(sampleResponse);
+
         ProductResponseDTO result = productService.create(toSave);
 
         assertNotNull(result);
@@ -67,6 +79,8 @@ class ProductServiceTest {
     @Test
     void get_shouldReturnProduct_whenFound() {
         when(productRepository.findById(1L)).thenReturn(Optional.of(sampleProduct));
+        when(cache.findProduct(1L)).thenReturn(Optional.empty());
+        when(productMapper.toResponseDto(sampleProduct)).thenReturn(sampleResponse);
 
         ProductResponseDTO result = productService.get(1L);
 
@@ -87,14 +101,20 @@ class ProductServiceTest {
     @Test
     void list_shouldReturnPageFromRepository() {
         Pageable pageable = PageRequest.of(0, 10);
-        Page<ProductEntity> page = new PageImpl<>(List.of(sampleProduct), pageable, 1);
-        when(productRepository.findAll(pageable)).thenReturn(page);
+
+        Page<ProductEntity> productPage = new PageImpl<>(List.of(sampleProduct), pageable, 1);
+        Page<ProductResponseDTO> dtoPage = new PageImpl<>(List.of(sampleResponse), pageable, 1);
+
+        when(cache.findPage(pageable)).thenReturn(Optional.empty());
+        when(productRepository.findAll(pageable)).thenReturn(productPage);
+        when(productMapper.toResponseDto(sampleProduct)).thenReturn(sampleResponse);
 
         Page<ProductResponseDTO> result = productService.list(pageable);
 
         assertEquals(1, result.getTotalElements());
         assertEquals(sampleProduct.getId(), result.getContent().get(0).id());
         verify(productRepository).findAll(pageable);
+        verify(cache).savePage(pageable, dtoPage); // opcional
         verifyNoMoreInteractions(productRepository, productMapper);
     }
 
@@ -106,6 +126,13 @@ class ProductServiceTest {
                 .name("Old")
                 .price(50.0)
                 .enabled(true)
+                .build();
+
+        ProductEntity newEntity = ProductEntity.builder()
+                .id(1L)
+                .name("Updated")
+                .price(200.0)
+                .enabled(false)
                 .build();
 
         when(productRepository.findById(1L)).thenReturn(Optional.of(existing));
@@ -120,6 +147,7 @@ class ProductServiceTest {
         }).when(productMapper).updateEntityFromUpdateDto(eq(dto), eq(existing));
 
         when(productRepository.save(existing)).thenReturn(existing);
+        when(productMapper.toResponseDto(existing)).thenReturn(new ProductResponseDTO(newEntity));
 
         ProductResponseDTO result = productService.update(1L, dto);
 
