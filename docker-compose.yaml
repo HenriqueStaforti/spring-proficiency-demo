@@ -42,31 +42,31 @@ services:
     depends_on:
       - redis
 
-  app:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: crud-app
-    restart: always
-    depends_on:
-      - db
-      - rabbitmq
-      - redis
-    ports:
-      - "8080:8080"
-    environment:
-      - SPRING_DATASOURCE_URL=${SPRING_DATASOURCE_URL}
-      - SPRING_DATASOURCE_USERNAME=${SPRING_DATASOURCE_USERNAME}
-      - SPRING_DATASOURCE_PASSWORD=${SPRING_DATASOURCE_PASSWORD}
-      - RABBITMQ_HOST=${RABBITMQ_HOST}
-      - RABBITMQ_PORT=${RABBITMQ_PORT}
-      - RABBITMQ_USERNAME=${RABBITMQ_USERNAME}
-      - RABBITMQ_PASSWORD=${RABBITMQ_PASSWORD}
-      - RABBITMQ_PRODUCT_EXCHANGE=${RABBITMQ_PRODUCT_EXCHANGE}
-      - RABBITMQ_PRODUCT_QUEUE=${RABBITMQ_PRODUCT_QUEUE}
-      - RABBITMQ_PRODUCT_CREATED=${RABBITMQ_PRODUCT_CREATED}
-      - REDIS_HOST=${REDIS_HOST}
-      - REDIS_PORT=${REDIS_PORT}
+#  app:
+#    build:
+#      context: .
+#      dockerfile: Dockerfile
+#    container_name: crud-app
+#    restart: always
+#    depends_on:
+#      - db
+#      - rabbitmq
+#      - redis
+#    ports:
+#      - "8080:8080"
+#    environment:
+#      - SPRING_DATASOURCE_URL=${SPRING_DATASOURCE_URL}
+#      - SPRING_DATASOURCE_USERNAME=${SPRING_DATASOURCE_USERNAME}
+#      - SPRING_DATASOURCE_PASSWORD=${SPRING_DATASOURCE_PASSWORD}
+#      - RABBITMQ_HOST=${RABBITMQ_HOST}
+#      - RABBITMQ_PORT=${RABBITMQ_PORT}
+#      - RABBITMQ_USERNAME=${RABBITMQ_USERNAME}
+#      - RABBITMQ_PASSWORD=${RABBITMQ_PASSWORD}
+#      - RABBITMQ_PRODUCT_EXCHANGE=${RABBITMQ_PRODUCT_EXCHANGE}
+#      - RABBITMQ_PRODUCT_QUEUE=${RABBITMQ_PRODUCT_QUEUE}
+#      - RABBITMQ_PRODUCT_CREATED=${RABBITMQ_PRODUCT_CREATED}
+#      - REDIS_HOST=${REDIS_HOST}
+#      - REDIS_PORT=${REDIS_PORT}
 
 volumes:
   postgres_data:
