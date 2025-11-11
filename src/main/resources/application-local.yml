@@ -1,7 +1,7 @@
 spring:
   #DataSource
   datasource:
-    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/mydb}
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/crud-security}
     username: ${SPRING_DATASOURCE_USERNAME:admin}
     password: ${SPRING_DATASOURCE_PASSWORD:C0nnect123}
     driver-class-name: org.postgresql.Driver
@@ -48,6 +48,15 @@ security:
     # 1 day in milliseconds
     expirationMillis: 86400000
 
+#Feign
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 3000
+        readTimeout: 5000
+        loggerLevel: FULL
+
 #App - Custom
 app:
   #RabbitMQ
@@ -56,3 +65,6 @@ app:
       exchange: ${RABBITMQ_PRODUCT_EXCHANGE:product.exchange}
       queue: ${RABBITMQ_PRODUCT_QUEUE:product.queue}
       routing-key: ${RABBITMQ_PRODUCT_CREATED:product.created}
+  services:
+    audit:
+      url: ${AUDIT_SERVICE_URL:http://localhost:8081}
