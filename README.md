@@ -1,12 +1,12 @@
 # Spring Proficiency Demo
 
-Este projeto é uma demonstração prática de proficiência no ecossistema **Spring Boot**, reunindo diversos recursos amplamente utilizados em aplicações corporativas. Ele implementa um **CRUD de produtos**, utiliza **PostgreSQL** como banco de dados, **cache com Redis**, **mensageria com RabbitMQ**, e integração externa via **OpenFeign** para fins de auditoria.
+This project is a practical demonstration of proficiency within the **Spring Boot** ecosystem, bringing together several widely used components in corporate applications. It implements a **Product CRUD**, uses **PostgreSQL** as the relational database, **Redis** for caching, **RabbitMQ** for messaging, and integrates with an external service using **OpenFeign** for auditing purposes.
 
-O objetivo é apresentar práticas recomendadas de arquitetura, integração entre serviços, mecanismos de autenticação/autorização, mensageria, cache e comunicação externa.
+The goal is to showcase recommended practices in architecture, service integration, authentication/authorization mechanisms, messaging, caching, and external communication.
 
 ---
 
-## 🧾 **Tecnologias Utilizadas**
+## 🧾 Technologies Used
 
 - **Spring Boot**
 - **Spring Security**
@@ -23,60 +23,60 @@ O objetivo é apresentar práticas recomendadas de arquitetura, integração ent
 
 ---
 
-## 📌 **Principais Funcionalidades**
+## 📌 Main Features
 
-### 🔐 Autenticação & Autorização (Spring Security)
-- Criação e login de usuários.
-- Geração de tokens JWT.
-- A cada operação de login ou criação de usuário, é feita uma chamada externa via **OpenFeign** para um serviço de auditoria.
+### 🔐 Authentication & Authorization (Spring Security)
+- User creation and login.
+- JWT token generation.
+- Every login or user creation triggers an external audit request via **OpenFeign**.
 
-### 📦 CRUD de Produtos
-- Endpoints para criação, atualização, listagem e remoção.
-- Persistência utilizando **Spring Data JPA** com **PostgreSQL**.
-- Migrações controladas via **Flyway**.
+### 📦 Product CRUD
+- Endpoints for creating, updating, listing, and deleting products.
+- Persistence using **Spring Data JPA** with **PostgreSQL**.
+- Migrations managed via **Flyway**.
 
-### ⚡ Cache com Redis
-- As operações **GET** de produtos utilizam cache Redis para melhorar desempenho.
-- Atualizações invalidam o cache automaticamente.
+### ⚡ Redis Cache
+- Product **GET** operations use Redis caching to improve performance.
+- Cache entries are automatically invalidated on updates.
 
-### 📨 Mensageria com RabbitMQ
-- Ao criar um produto, o sistema publica uma mensagem no RabbitMQ.
-- O próprio serviço consome essa mensagem para fins de demonstração.
+### 📨 Messaging with RabbitMQ
+- When a product is created, the system publishes a message to RabbitMQ.
+- The service itself consumes the message for demonstration purposes.
 
 ---
 
-## 🚀 **Como Rodar o Projeto**
+## 🚀 How to Run the Project
 
-### ⚙️ **Pré‑requisitos**
+### ⚙️ Requirements
 - Docker
 - Java 17+
 - Maven 3.8+
-- Arquivo `.env` com variáveis obrigatórias (para o docker-compose)
+- `.env` file with required environment variables (for docker-compose)
 
 ---
 
-### ▶️ **1. Subir os serviços necessários**
+### ▶️ 1. Start Required Services
 
-Na raiz do projeto execute:
+In the project root, run:
 
 ```bash
 docker compose up -d
 ```
 
-Isso irá subir:
+This will start:
 - PostgreSQL
 - Redis
 - RabbitMQ
 
 ---
 
-### ▶️ **2. Executar a aplicação**
+### ▶️ **2. Run the application**
 
 ```bash
 mvn spring-boot:run
 ```
 
-A API estará disponível em:
+The API will be available at::
 
 ```
 http://localhost:8080
@@ -84,27 +84,27 @@ http://localhost:8080
 
 ---
 
-## 🧪 **Endpoints Principais**
+## 🧪 **Main Endpoints**
 
-### 🔐 **Autenticação**
-- `POST /auth/register` — Cria novo usuário (dispara request externo via Feign)
-- `POST /auth/login` — Gera token JWT (também audita via Feign)
+### 🔐 **Authentication**
+- `POST /auth/register` — Creates a new user (triggers an external audit request via Feign)
+- `POST /auth/login` — Generates a JWT token (also triggers an audit request via Feign)
 
-### 📦 **Produtos**
-- `GET /products` — Lista produtos (com cache Redis)
-- `POST /products` — Cria produto (publica mensagem RabbitMQ)
-- `GET /products/{id}` — Lista produto específico (com cache Redis)
-- `PATCH /products/{id}` — Atualiza produto
-- `DELETE /products/{id}` — Remove produto
-
----
-
-## 📄 **Licença**
-
-Este projeto está sob licença MIT. Sinta‑se à vontade para utilizar como referência.
+### 📦 **Products**
+- `GET /products` — Lists products (with Redis cache)
+- `POST /products` — Creates a product (publishes a RabbitMQ message)
+- `GET /products/{id}` — Retrieves a specific product (with Redis cache)
+- `PATCH /products/{id}` — Updates a product
+- `DELETE /products/{id}` — Removes a product
 
 ---
 
-## 👤 **Autor**
+## 📄 **License**
+
+This project is licensed under the MIT License. Feel free to use it as a reference.
+
+---
+
+## 👤 **Author**
 **Henrique Staforti**  
 GitHub: https://github.com/HenriqueStaforti
