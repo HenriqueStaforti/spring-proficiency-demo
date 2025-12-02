@@ -23,7 +23,6 @@ public class JwtService {
             @Value("${security.jwt.secret}") String secret,
             @Value("${security.jwt.expirationMillis:86400000}") long expirationMillis
     ) {
-        // Use UTF-8 bytes of the secret. Ensure the configured secret has 32+ characters for HS256.
         this.key = Keys.hmacShaKeyFor(secret.getBytes(java.nio.charset.StandardCharsets.UTF_8));
         this.expirationMillis = expirationMillis;
     }
@@ -51,18 +50,6 @@ public class JwtService {
 
     public String getUsername(String token) {
         return getAllClaims(token).getSubject();
-    }
-
-    @SuppressWarnings("unchecked")
-    public Set<String> getRoles(String token) {
-        Object roles = getAllClaims(token).get("roles");
-        if (roles instanceof Set<?> set) {
-            return (Set<String>) set;
-        }
-        if (roles instanceof java.util.Collection<?> col) {
-            return (Set<String>) new java.util.HashSet<>(col);
-        }
-        return java.util.Collections.emptySet();
     }
 
     public Instant getExpiryFromNow() {
