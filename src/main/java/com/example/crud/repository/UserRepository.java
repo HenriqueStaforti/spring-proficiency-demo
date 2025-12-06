@@ -1,6 +1,6 @@
 package com.example.crud.repository;
 
-import com.example.crud.model.UserEntity;
+import com.example.crud.entity.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

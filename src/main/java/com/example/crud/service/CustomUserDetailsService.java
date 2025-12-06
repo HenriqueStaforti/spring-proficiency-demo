@@ -1,6 +1,6 @@
 package com.example.crud.service;
 
-import com.example.crud.model.UserEntity;
+import com.example.crud.entity.UserEntity;
 import com.example.crud.repository.UserRepository;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -26,7 +26,8 @@ public class CustomUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         UserEntity user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
-        Set<GrantedAuthority> authorities = user.getRoles().stream()
+        Set<GrantedAuthority> authorities = user.getRoles()
+                .stream()
                 .map(SimpleGrantedAuthority::new)
                 .collect(Collectors.toSet());
         return new User(user.getUsername(), user.getPassword(), authorities);

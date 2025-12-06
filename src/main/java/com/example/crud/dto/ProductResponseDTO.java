@@ -1,6 +1,6 @@
 package com.example.crud.dto;
 
-import com.example.crud.model.ProductEntity;
+import com.example.crud.entity.ProductEntity;
 
 import java.time.Instant;
 

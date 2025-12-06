@@ -1,4 +1,4 @@
-package com.example.crud.client;
+package com.example.crud.infrastructure.http.client;
 
 import com.example.crud.dto.AuditEventRequestDTO;
 import org.springframework.cloud.openfeign.FeignClient;

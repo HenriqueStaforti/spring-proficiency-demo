@@ -5,20 +5,18 @@ import com.example.crud.dto.LoginDTO;
 import com.example.crud.dto.RegisterDTO;
 import com.example.crud.dto.TokenDTO;
 import com.example.crud.enums.AuditAction;
-import com.example.crud.model.UserEntity;
+import com.example.crud.entity.UserEntity;
 import com.example.crud.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
-import java.util.Random;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -50,7 +48,19 @@ public class AuthService {
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-        Set<String> roles = userDetails.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toSet());
+
+//        Set<String> roles = new HashSet<>();
+//        for (GrantedAuthority authority : userDetails.getAuthorities()) {
+//            roles.add(authority.getAuthority());
+//        }
+//
+//        Same as:
+
+        Set<String> roles = userDetails.getAuthorities()
+                .stream()
+                .map(authority -> authority.getAuthority())
+                .collect(Collectors.toSet());
+
         String token = jwtService.generateToken(userDetails.getUsername(), roles);
         Instant expiresAt = jwtService.getExpiryFromNow();
 

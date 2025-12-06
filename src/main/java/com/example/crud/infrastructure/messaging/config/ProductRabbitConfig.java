@@ -1,4 +1,4 @@
-package com.example.crud.config;
+package com.example.crud.infrastructure.messaging.config;
 
 import lombok.Getter;
 import org.springframework.amqp.core.Binding;

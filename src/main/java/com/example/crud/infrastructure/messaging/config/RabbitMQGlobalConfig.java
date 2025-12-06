@@ -1,4 +1,4 @@
-package com.example.crud.config;
+package com.example.crud.infrastructure.messaging.config;
 
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;

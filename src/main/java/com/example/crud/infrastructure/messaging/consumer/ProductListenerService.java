@@ -1,9 +1,7 @@
-package com.example.crud.service;
+package com.example.crud.infrastructure.messaging.consumer;
 
-import com.example.crud.model.ProductEntity;
+import com.example.crud.entity.ProductEntity;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 @Service

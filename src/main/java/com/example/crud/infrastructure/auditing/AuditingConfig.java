@@ -1,4 +1,4 @@
-package com.example.crud.config;
+package com.example.crud.infrastructure.auditing;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;

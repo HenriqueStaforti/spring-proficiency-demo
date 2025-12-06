@@ -1,4 +1,4 @@
-package com.example.crud.security;
+package com.example.crud.infrastructure.security;
 
 import com.example.crud.service.JwtService;
 import org.springframework.http.HttpHeaders;

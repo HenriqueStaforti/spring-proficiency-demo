@@ -3,7 +3,7 @@ package com.example.crud.controller;
 import com.example.crud.dto.ProductRequestDTO;
 import com.example.crud.dto.ProductResponseDTO;
 import com.example.crud.mapper.ProductMapper;
-import com.example.crud.model.ProductEntity;
+import com.example.crud.entity.ProductEntity;
 import com.example.crud.service.JwtService;
 import com.example.crud.service.ProductService;
 import com.fasterxml.jackson.databind.ObjectMapper;

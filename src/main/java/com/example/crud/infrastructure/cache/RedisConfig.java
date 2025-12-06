@@ -1,4 +1,4 @@
-package com.example.crud.config;
+package com.example.crud.infrastructure.cache;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
