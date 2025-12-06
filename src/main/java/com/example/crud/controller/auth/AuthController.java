@@ -1,9 +1,9 @@
-package com.example.crud.controller;
+package com.example.crud.controller.auth;
 
-import com.example.crud.dto.LoginDTO;
-import com.example.crud.dto.RegisterDTO;
-import com.example.crud.dto.TokenDTO;
-import com.example.crud.service.AuthService;
+import com.example.crud.dto.user.LoginDTO;
+import com.example.crud.dto.user.RegisterDTO;
+import com.example.crud.dto.user.TokenDTO;
+import com.example.crud.service.auth.AuthService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

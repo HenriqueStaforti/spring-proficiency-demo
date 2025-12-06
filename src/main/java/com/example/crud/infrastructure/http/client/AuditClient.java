@@ -1,6 +1,6 @@
 package com.example.crud.infrastructure.http.client;
 
-import com.example.crud.dto.AuditEventRequestDTO;
+import com.example.crud.dto.audit.AuditEventRequestDTO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

@@ -1,7 +1,7 @@
-package com.example.crud.service;
+package com.example.crud.infrastructure.security.service;
 
-import com.example.crud.entity.UserEntity;
-import com.example.crud.repository.UserRepository;
+import com.example.crud.entity.user.UserEntity;
+import com.example.crud.repository.user.UserRepository;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;

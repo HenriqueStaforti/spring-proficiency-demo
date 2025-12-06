@@ -1,6 +1,6 @@
-package com.example.crud.infrastructure.security;
+package com.example.crud.infrastructure.security.filter;
 
-import com.example.crud.service.JwtService;
+import com.example.crud.infrastructure.security.jwt.JwtService;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;

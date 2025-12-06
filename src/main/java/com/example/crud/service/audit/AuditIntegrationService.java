@@ -1,7 +1,7 @@
-package com.example.crud.service;
+package com.example.crud.service.audit;
 
 import com.example.crud.infrastructure.http.client.AuditClient;
-import com.example.crud.dto.AuditEventRequestDTO;
+import com.example.crud.dto.audit.AuditEventRequestDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 

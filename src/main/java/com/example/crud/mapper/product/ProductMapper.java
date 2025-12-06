@@ -1,9 +1,9 @@
-package com.example.crud.mapper;
+package com.example.crud.mapper.product;
 
-import com.example.crud.dto.ProductRequestDTO;
-import com.example.crud.dto.ProductResponseDTO;
-import com.example.crud.dto.ProductUpdateRequestDTO;
-import com.example.crud.entity.ProductEntity;
+import com.example.crud.dto.product.ProductRequestDTO;
+import com.example.crud.dto.product.ProductResponseDTO;
+import com.example.crud.dto.product.ProductUpdateRequestDTO;
+import com.example.crud.entity.product.ProductEntity;
 import org.mapstruct.BeanMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;

@@ -1,6 +1,6 @@
 package com.example.crud.infrastructure.security.config;
 
-import com.example.crud.infrastructure.security.JwtAuthenticationFilter;
+import com.example.crud.infrastructure.security.filter.JwtAuthenticationFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;

@@ -1,13 +1,13 @@
-package com.example.crud.service;
+package com.example.crud.service.product;
 
-import com.example.crud.dto.ProductResponseDTO;
-import com.example.crud.dto.ProductUpdateRequestDTO;
+import com.example.crud.dto.product.ProductResponseDTO;
+import com.example.crud.dto.product.ProductUpdateRequestDTO;
 import com.example.crud.exception.ResourceNotFoundException;
 import com.example.crud.infrastructure.messaging.producer.ProductPublisherService;
-import com.example.crud.mapper.ProductMapper;
-import com.example.crud.entity.ProductEntity;
-import com.example.crud.repository.ProductCacheRepository;
-import com.example.crud.repository.ProductRepository;
+import com.example.crud.mapper.product.ProductMapper;
+import com.example.crud.entity.product.ProductEntity;
+import com.example.crud.repository.product.ProductCacheRepository;
+import com.example.crud.repository.product.ProductRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

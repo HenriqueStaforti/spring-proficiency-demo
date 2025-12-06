@@ -1,10 +1,10 @@
-package com.example.crud.controller;
+package com.example.crud.controller.product;
 
-import com.example.crud.dto.ProductRequestDTO;
-import com.example.crud.dto.ProductResponseDTO;
-import com.example.crud.dto.ProductUpdateRequestDTO;
-import com.example.crud.mapper.ProductMapper;
-import com.example.crud.service.ProductService;
+import com.example.crud.dto.product.ProductRequestDTO;
+import com.example.crud.dto.product.ProductResponseDTO;
+import com.example.crud.dto.product.ProductUpdateRequestDTO;
+import com.example.crud.mapper.product.ProductMapper;
+import com.example.crud.service.product.ProductService;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

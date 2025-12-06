@@ -1,6 +1,6 @@
-package com.example.crud.dto;
+package com.example.crud.dto.product;
 
-import com.example.crud.entity.ProductEntity;
+import com.example.crud.entity.product.ProductEntity;
 
 import java.time.Instant;
 

@@ -1,11 +1,12 @@
 package com.example.crud.controller;
 
-import com.example.crud.dto.ProductRequestDTO;
-import com.example.crud.dto.ProductResponseDTO;
-import com.example.crud.mapper.ProductMapper;
-import com.example.crud.entity.ProductEntity;
-import com.example.crud.service.JwtService;
-import com.example.crud.service.ProductService;
+import com.example.crud.controller.product.ProductController;
+import com.example.crud.dto.product.ProductRequestDTO;
+import com.example.crud.dto.product.ProductResponseDTO;
+import com.example.crud.mapper.product.ProductMapper;
+import com.example.crud.entity.product.ProductEntity;
+import com.example.crud.infrastructure.security.jwt.JwtService;
+import com.example.crud.service.product.ProductService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,6 +1,6 @@
-package com.example.crud.dto;
+package com.example.crud.dto.audit;
 
-import com.example.crud.enums.AuditAction;
+import com.example.crud.enums.audit.AuditAction;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PastOrPresent;

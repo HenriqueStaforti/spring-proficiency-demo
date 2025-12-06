@@ -1,4 +1,4 @@
-package com.example.crud.enums;
+package com.example.crud.enums.audit;
 
 public enum AuditAction {
     CREATE,

@@ -1,6 +1,6 @@
 package com.example.crud.infrastructure.messaging.consumer;
 
-import com.example.crud.entity.ProductEntity;
+import com.example.crud.entity.product.ProductEntity;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Service;
 

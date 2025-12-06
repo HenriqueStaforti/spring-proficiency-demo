@@ -1,4 +1,4 @@
-package com.example.crud.service;
+package com.example.crud.infrastructure.security.jwt;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

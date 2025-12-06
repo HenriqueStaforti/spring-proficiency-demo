@@ -1,12 +1,14 @@
-package com.example.crud.service;
+package com.example.crud.service.auth;
 
-import com.example.crud.dto.AuditEventRequestDTO;
-import com.example.crud.dto.LoginDTO;
-import com.example.crud.dto.RegisterDTO;
-import com.example.crud.dto.TokenDTO;
-import com.example.crud.enums.AuditAction;
-import com.example.crud.entity.UserEntity;
-import com.example.crud.repository.UserRepository;
+import com.example.crud.dto.audit.AuditEventRequestDTO;
+import com.example.crud.dto.user.LoginDTO;
+import com.example.crud.dto.user.RegisterDTO;
+import com.example.crud.dto.user.TokenDTO;
+import com.example.crud.enums.audit.AuditAction;
+import com.example.crud.entity.user.UserEntity;
+import com.example.crud.infrastructure.security.jwt.JwtService;
+import com.example.crud.repository.user.UserRepository;
+import com.example.crud.service.audit.AuditIntegrationService;
 import jakarta.transaction.Transactional;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
