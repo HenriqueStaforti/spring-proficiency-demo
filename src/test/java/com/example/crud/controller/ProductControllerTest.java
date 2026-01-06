@@ -47,6 +47,7 @@ public class ProductControllerTest {
     @Test
     @WithMockUser(username = "user", roles = {"USER"})
     void shouldReturnProductResponseWhenCreateProductSuccessfully() throws Exception {
+        // Arrange
         ProductRequestDTO productRequestDTO = buildProductRequest("Product 1", 123.99, true);
         ProductResponseDTO expectedResponse = buildProductResponse(1L, "Product 1", 123.99, true, Instant.now());
 
@@ -54,6 +55,7 @@ public class ProductControllerTest {
         when(productMapper.toResponseDto(any(ProductEntity.class))).thenReturn(expectedResponse);
         when(productService.create(any(ProductEntity.class))).thenReturn(expectedResponse);
 
+        // Act
         MvcResult result = mockMvc.perform(post("/products")
             .with(csrf())
             .contentType(MediaType.APPLICATION_JSON)
@@ -66,6 +68,7 @@ public class ProductControllerTest {
                 ProductResponseDTO.class
         );
 
+        // Assert
         assertEquals(expectedResponse.name(), response.name());
         assertEquals(expectedResponse.price(), response.price());
         assertEquals(expectedResponse.enabled(), response.enabled());
@@ -74,8 +77,10 @@ public class ProductControllerTest {
     @Test
     @WithMockUser(username = "user", roles = {"USER"})
     void shouldReturn400WhenCreateProductWithInvalidName() throws Exception {
+        // Arrange
         ProductRequestDTO productRequestDTO = buildProductRequest("", 123.99, true);
 
+        // Act & Assert
         mockMvc.perform(post("/products")
             .with(csrf())
             .contentType(MediaType.APPLICATION_JSON)

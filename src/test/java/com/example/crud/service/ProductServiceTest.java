@@ -65,13 +65,16 @@ class ProductServiceTest {
 
     @Test
     void create_shouldPersistAndReturnProduct() {
+        // Arrange
         ProductEntity toSave = ProductEntity.builder().name("New").price(10.0).enabled(true).build();
 
         when(productRepository.save(any(ProductEntity.class))).thenReturn(sampleProduct);
         when(productMapper.toResponseDto(sampleProduct)).thenReturn(sampleResponse);
 
+        // Act
         ProductResponseDTO result = productService.create(toSave);
 
+        // Assert
         assertNotNull(result);
         assertEquals(sampleProduct.getId(), result.id());
         verify(productRepository).save(toSave);
@@ -80,12 +83,15 @@ class ProductServiceTest {
 
     @Test
     void get_shouldReturnProduct_whenFound() {
+        // Arrange
         when(productRepository.findById(1L)).thenReturn(Optional.of(sampleProduct));
         when(cache.findProduct(1L)).thenReturn(Optional.empty());
         when(productMapper.toResponseDto(sampleProduct)).thenReturn(sampleResponse);
 
+        // Act
         ProductResponseDTO result = productService.get(1L);
 
+        // Assert
         assertEquals(1L, result.id());
         verify(productRepository).findById(1L);
         verifyNoMoreInteractions(productRepository, productMapper);
@@ -93,8 +99,10 @@ class ProductServiceTest {
 
     @Test
     void get_shouldThrowResourceNotFound_whenMissing() {
+        // Arrange
         when(productRepository.findById(999L)).thenReturn(Optional.empty());
 
+        // Act & Assert
         assertThrows(ResourceNotFoundException.class, () -> productService.get(999L));
         verify(productRepository).findById(999L);
         verifyNoMoreInteractions(productRepository, productMapper);
@@ -102,6 +110,7 @@ class ProductServiceTest {
 
     @Test
     void list_shouldReturnPageFromRepository() {
+        // Arrange
         Pageable pageable = PageRequest.of(0, 10);
 
         Page<ProductEntity> productPage = new PageImpl<>(List.of(sampleProduct), pageable, 1);
@@ -111,8 +120,10 @@ class ProductServiceTest {
         when(productRepository.findAll(pageable)).thenReturn(productPage);
         when(productMapper.toResponseDto(sampleProduct)).thenReturn(sampleResponse);
 
+        // Act
         Page<ProductResponseDTO> result = productService.list(pageable);
 
+        // Assert
         assertEquals(1, result.getTotalElements());
         assertEquals(sampleProduct.getId(), result.getContent().get(0).id());
         verify(productRepository).findAll(pageable);
@@ -122,6 +133,7 @@ class ProductServiceTest {
 
     @Test
     void update_shouldMapAndSave_whenFound() {
+        // Arrange
         ProductUpdateRequestDTO dto = new ProductUpdateRequestDTO("Updated", 200.0, false);
         ProductEntity existing = ProductEntity.builder()
                 .id(1L)
@@ -151,8 +163,10 @@ class ProductServiceTest {
         when(productRepository.save(existing)).thenReturn(existing);
         when(productMapper.toResponseDto(existing)).thenReturn(new ProductResponseDTO(newEntity));
 
+        // Act
         ProductResponseDTO result = productService.update(1L, dto);
 
+        // Assert
         assertEquals("Updated", result.name());
         assertEquals(200.0, result.price());
         assertFalse(result.enabled());
@@ -165,9 +179,11 @@ class ProductServiceTest {
 
     @Test
     void update_shouldThrowResourceNotFound_whenMissing() {
+        // Arrange
         ProductUpdateRequestDTO dto = new ProductUpdateRequestDTO("Updated", 200.0, false);
         when(productRepository.findById(123L)).thenReturn(Optional.empty());
 
+        // Act & Assert
         assertThrows(ResourceNotFoundException.class, () -> productService.update(123L, dto));
         verify(productRepository).findById(123L);
         verifyNoInteractions(productMapper);
@@ -176,10 +192,13 @@ class ProductServiceTest {
 
     @Test
     void delete_shouldDelegateToRepository() {
+        // Arrange
         doNothing().when(productRepository).deleteById(1L);
 
+        // Act
         productService.delete(1L);
 
+        // Assert
         verify(productRepository).deleteById(1L);
         verifyNoMoreInteractions(productRepository, productMapper);
     }
